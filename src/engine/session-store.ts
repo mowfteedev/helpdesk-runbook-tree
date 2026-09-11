@@ -148,6 +148,15 @@ export class SessionStore {
   }
 
   /**
+   * Gán Engine điều hướng đang hoạt động và đồng bộ phiên.
+   */
+  public setActiveEngine(engine: TraversalEngine | null): void {
+    this.activeEngine = engine;
+    this.persistActiveSession();
+    this.notifyChange();
+  }
+
+  /**
    * Lấy dữ liệu phiên đang hoạt động từ bộ nhớ hoặc LocalStorage.
    */
   public getActiveSession(): DiagnosticSession | null {

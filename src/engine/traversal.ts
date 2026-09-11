@@ -134,6 +134,20 @@ export class TraversalEngine {
     return this.sessionId;
   }
 
+  /**
+   * Cập nhật mã Ticket hệ thống cho phiên chẩn đoán.
+   */
+  public setTicketId(ticketId: string): void {
+    this.ticketId = ticketId;
+  }
+
+  /**
+   * Cập nhật tên kỹ thuật viên phụ trách.
+   */
+  public setTechnicianName(name: string): void {
+    this.technicianName = name;
+  }
+
   // --------------------------------------------------------------------------
   // STATE MUTATION (NAVIGATION)
   // --------------------------------------------------------------------------

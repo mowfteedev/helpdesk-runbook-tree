@@ -87,17 +87,13 @@
   }
 
   function handleUpdateTicketId(id: string) {
-    const session = engine.toDiagnosticSession();
-    session.ticketId = id;
-    engine = TraversalEngine.fromDiagnosticSession(engine.getRunbook(), session);
+    engine.setTicketId(id);
     sessionStore.persistActiveSession();
     updateTrigger += 1;
   }
 
   function handleUpdateTechnicianName(name: string) {
-    const session = engine.toDiagnosticSession();
-    session.technicianName = name;
-    engine = TraversalEngine.fromDiagnosticSession(engine.getRunbook(), session);
+    engine.setTechnicianName(name);
     sessionStore.persistActiveSession();
     updateTrigger += 1;
   }
