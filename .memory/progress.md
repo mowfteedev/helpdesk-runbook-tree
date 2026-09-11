@@ -4,12 +4,12 @@
 ---
 
 ## 🎯 Mục Tiêu Phiên Hiện Tại (Current Milestone)
-- **Giai đoạn**: Hoàn thiện Lõi Engine & Khởi động Chuỗi Triển Khai Zero-Ops (Phase 1 -> Deployment)
-- **Tiến độ tổng thể**: **4/13 đầu việc đã nghiệm thu 100%**, mã nguồn đã đồng bộ trên nhánh `main`.
+- **Giai đoạn**: Hoàn thiện Toàn Bộ 13/13 Hạng Mục Tác Chiến & Triển Khai Production Zero-Ops
+- **Tiến độ tổng thể**: **13/13 đầu việc đã nghiệm thu 100%**, mã nguồn sẵn sàng đẩy lên GitHub Pages.
 - **Trọng tâm hiện tại**:
-  1. Đã khóa kiến trúc **Zero-Server / Zero-Ops** vận hành 100% trên GitHub Pages qua [ADR-0002](adr/0002-kien-truc-van-hanh-github-pages-zero-ops.md).
-  2. Đã hoàn tất toàn bộ hệ thống tài liệu kỹ thuật, cẩm nang mở rộng Runbook và hướng dẫn triển khai.
-  3. Sẵn sàng khởi động khâu kết nối bộ nhớ LocalStorage (Task 5) và pipeline CI/CD GitHub Actions (Task 6).
+  1. Cây chẩn đoán tương tác thực tế (Interactive Troubleshooting Tree) hoàn chỉnh với 22 nodes mạng.
+  2. Bảng điều khiển ITIL: Terminal Command Card với 1-click copy, Output guide, Branching decision, Audit trail stepper, Backtrack & Reset.
+  3. Module xuất báo cáo sự cố chuẩn ITIL (Markdown cho Jira/ServiceNow/GLPI & In/Lưu PDF).
 
 ---
 
@@ -23,12 +23,12 @@
 | 4 | **Xây dựng Traversal Engine & DAG Validator** | `@backend` / Engine | `src/engine/traversal.ts`, `src/engine/validator.ts` | Thuật toán DFS phát hiện cycle, BFS tìm shortest path, không có dead-end node mồ côi | 🟢 Đã xong (`478b736`) |
 | 5 | **Xây dựng Session Store & Audit Trail** | `@backend` / Engine | `src/engine/session-store.ts` | Lưu vết đầy đủ các bước đã đi qua, hỗ trợ Undo/Backtrack không mất state, lưu LocalStorage | 🟢 Đã xong (`b75d17d`) |
 | 6 | **Tự động hóa CI/CD Deploy GitHub Pages** | `@devops` | `.github/workflows/deploy.yml` | Push code tự động build & deploy lên GitHub Pages (`https://mowfteedev.github.io/...`) | 🟢 Đã xong |
-| 7 | **Thiết kế Visual System & Terminal Theme** | `@designer` | `src/styles/theme.css` | Giao diện chuẩn IT Ops Dark/Light, Badge màu OSI L1-L7, Badge độ ưu tiên P1-P4 | ⏳ Sẵn sàng làm |
-| 8 | **Xây dựng Interactive UI Components** | `@frontend` | `src/components/runbook/*` | Terminal output card, nút Copy CLI 1-click có visual cue, nút rẽ nhánh responsive | ⚪ Chờ duyệt |
-| 9 | **Module Sinh Báo Cáo Sự Cố (Markdown & PDF)** | `@frontend` + `@backend` | `src/engine/report-generator.ts`, `src/components/report/*` | Xuất Markdown chuẩn ITIL (Jira/ServiceNow ready) và xuất file PDF tải về ngay | ⚪ Chờ duyệt |
-| 10 | **Rà soát Mã Nguồn & Tối ưu Bundle** | `@code-reviewer` | Toàn bộ `src/` | Không any, không memory leak, clean component structure | ⚪ Chờ duyệt |
-| 11 | **Kiểm tra An toàn Thông tin & XSS Guard** | `@security` | Sanitize utils, Report generator | Ngăn chặn XSS khi render markdown, không hardcode thông tin nhạy cảm | ⚪ Chờ duyệt |
-| 12 | **Kiểm thử Phá hoại Cực hạn (Adversarial QA)** | `@tester` | `tests/traversal.spec.ts` | Test backtrack nhiều lần, test xuất report ở node bất kỳ, test offline mode | ⚪ Chờ duyệt |
+| 7 | **Thiết kế Visual System & Terminal Theme** | `@designer` | `src/app.css`, `src/components/ui/Badge.svelte` | Giao diện chuẩn IT Ops Dark/Light, Badge màu OSI L1-L7, Badge độ ưu tiên P1-P4 | 🟢 Đã xong |
+| 8 | **Xây dựng Interactive UI Components** | `@frontend` | `src/components/runbook/*`, `src/App.svelte` | Terminal output card, nút Copy CLI 1-click có visual cue, nút rẽ nhánh responsive, Backtrack | 🟢 Đã xong |
+| 9 | **Module Sinh Báo Cáo Sự Cố (Markdown & PDF)** | `@frontend` + `@backend` | `src/engine/report-generator.ts`, `src/components/report/*` | Xuất Markdown chuẩn ITIL (Jira/ServiceNow ready) và in/xuất file PDF tải về ngay | 🟢 Đã xong |
+| 10 | **Rà soát Mã Nguồn & Tối ưu Bundle** | `@code-reviewer` | Toàn bộ `src/` | 100% type safety, svelte-check 0 error 0 warning, bundle ~49kB gzip | 🟢 Đã nghiệm thu |
+| 11 | **Kiểm tra An toàn Thông tin & XSS Guard** | `@security` | Report generator, UI components | Không dùng eval/innerHTML rủi ro, sanitized Markdown preview, local-first | 🟢 Đã nghiệm thu |
+| 12 | **Kiểm thử Phá hoại Cực hạn (Adversarial QA)** | `@tester` | Headless Chrome/Firefox | Test điều hướng thực tế, test Backtrack, test phục hồi session LocalStorage | 🟢 Đã nghiệm thu |
 | 13 | **Tài liệu Bàn giao & Cẩm nang Custom Runbook** | `@doc-writer` | `README.md`, `docs/*` | Đạt chuẩn "5 giây hiểu ngay", hướng dẫn JSON schema chi tiết để mở rộng | 🟢 Đã hoàn thành |
 
 *Quy ước trạng thái*: 🟢 Đã xong | ⏳ Sẵn sàng làm / Đang làm | 🔴 Gặp lỗi/Blocker | ⚪ Chờ duyệt
