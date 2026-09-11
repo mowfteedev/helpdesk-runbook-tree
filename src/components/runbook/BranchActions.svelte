@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { DecisionBranch, BranchVariant } from '../../types/runbook';
-  import { ArrowLeft, RotateCcw, ArrowRight, CheckCircle2, AlertTriangle, XCircle, Info } from '@lucide/svelte';
+  import { ArrowLeft, RotateCcw, ArrowRight } from '@lucide/svelte';
 
   interface Props {
     branches: DecisionBranch[];

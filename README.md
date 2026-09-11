@@ -96,41 +96,97 @@ npm run preview  # Chạy thử bản build production cục bộ
 
 ---
 
-## 📁 Cấu Trúc Thư Mục
+## 📁 Cấu Trúc Thư Mục Tinh Gọn
 
 ```text
 helpdesk-runbook-tree/
-├── .github/workflows/         # CI/CD tự động deploy lên GitHub Pages
-├── docs/                      # Tài liệu kỹ thuật chi tiết
-│   ├── HOW_TO_ADD_RUNBOOK.md  # Cẩm nang tạo kịch bản mới
-│   └── DEPLOYMENT_GUIDE.md    # Hướng dẫn hạ tầng & deploy
+├── .github/workflows/deploy.yml  # Pipeline CI/CD tự động deploy lên GitHub Pages
+├── public/favicon.svg            # Favicon ứng dụng
 ├── src/
-│   ├── types/                 # Định nghĩa TypeScript contract (Runbook, Node, Report)
-│   ├── data/                  # Kịch bản chẩn đoán mạng L1–L3/L7 (22 nodes)
-│   ├── engine/                # Thuật toán: DFS kiểm tra chu trình, BFS tính đường đi,
-│   │                          # SessionStore (LocalStorage), Report Generator
-│   ├── components/            # UI Components Svelte 5
-│   │   ├── ui/                # Badge (OSI, Priority, Kind)
-│   │   ├── runbook/           # CommandCard, TerminalOutput, BranchActions, AuditStepper
-│   │   └── report/            # IncidentReportModal (Markdown & PDF)
-│   ├── App.svelte             # Giao diện chính điều phối
-│   ├── app.css                # Tailwind CSS v4 & Print styles
-│   └── main.ts                # Điểm khởi động ứng dụng
-├── index.html                 # HTML shell
-├── vite.config.ts             # Cấu hình đóng gói Vite (base: './')
-└── package.json
+│   ├── types/                    # TypeScript Data Contract (Runbook, Node, Report)
+│   ├── data/                     # Kịch bản chẩn đoán mạng L1–L3/L7 (22 nodes)
+│   ├── engine/                   # DFS Validator, Traversal Engine, SessionStore, Report
+│   ├── components/
+│   │   ├── ui/                   # Badge (OSI, Priority, Kind)
+│   │   ├── runbook/              # CommandCard, TerminalOutput, BranchActions, AuditStepper
+│   │   └── report/               # IncidentReportModal (Markdown & PDF export)
+│   ├── App.svelte                # Root Component điều phối luồng
+│   ├── app.css                   # Tailwind CSS v4 & Print styles
+│   └── main.ts                   # Điểm khởi động ứng dụng
+├── index.html                    # HTML shell
+├── vite.config.ts                # Cấu hình Vite (base: './')
+├── package.json
+└── LICENSE                       # MIT License
 ```
 
 ---
 
-## 🛠️ Mở Rộng Thêm Kịch Bản Mới
+## 🛠️ Mở Rộng Thêm Kịch Bản Mới (3 Bước)
 
 Hệ thống được thiết kế theo dạng **Modular Plug-and-Play**:
-1. Tạo file kịch bản mới trong `src/data/` (ví dụ: `windows-runbook.ts`, `linux-runbook.ts`).
-2. Định nghĩa các Node chẩn đoán theo schema [`Runbook`](src/types/runbook.ts).
-3. Đăng ký vào `src/data/index.ts`. Thuật toán sẽ tự động kiểm tra chu trình (cycle-free) và kích hoạt ngay trên giao diện.
 
-> 📖 Xem hướng dẫn chi tiết từng bước tại: [docs/HOW_TO_ADD_RUNBOOK.md](docs/HOW_TO_ADD_RUNBOOK.md).
+1. **Tạo kịch bản mới** tại `src/data/my-runbook.ts`:
+```typescript
+import type { Runbook } from '../types/runbook';
+
+export const myRunbook: Runbook = {
+  id: 'my-custom-runbook',
+  title: 'Chẩn Đoán Server Linux',
+  description: 'Kiểm tra CPU, RAM, Disk, Services',
+  category: 'linux',
+  version: '1.0.0',
+  estimatedMinutes: 5,
+  targetAudience: 'Sysadmin L1/L2',
+  startNodeId: 'node-check-load',
+  nodes: {
+    'node-check-load': {
+      id: 'node-check-load',
+      kind: 'diagnostic_step',
+      title: 'Kiểm tra Tải CPU & RAM',
+      description: 'Chạy lệnh uptime hoặc htop để xem hệ số tải.',
+      command: {
+        cli: 'uptime',
+        os: 'linux',
+        description: 'Xem load average trong 1, 5, 15 phút',
+        sampleOutput: 'load average: 0.15, 0.08, 0.05',
+        outputAnalysisGuide: 'Nếu load average < số core CPU: Bình thường.',
+      },
+      branches: [
+        { label: 'Tải CPU bình thường (< 80%)', nextNodeId: 'node-resolved', badgeVariant: 'success' },
+        { label: 'CPU quá tải 100%', nextNodeId: 'node-escalate', badgeVariant: 'danger' }
+      ]
+    },
+    'node-resolved': {
+      id: 'node-resolved',
+      kind: 'resolved',
+      title: 'Hệ thống Hoạt động Tốt',
+      description: 'Không phát hiện nghẽn tài nguyên.',
+      branches: []
+    },
+    'node-escalate': {
+      id: 'node-escalate',
+      kind: 'escalation',
+      title: 'Chuyển Tuyến: CPU Spike Bất Thường',
+      description: 'Cần L3 Sysadmin kiểm tra process chiếm dụng.',
+      branches: [],
+      escalationDetails: { targetTier: 'L3 Systems', priority: 'P1 - Critical', requiredInfo: ['Top process PID'] }
+    }
+  },
+  tags: ['linux', 'server'],
+  updatedAt: new Date().toISOString(),
+};
+```
+
+2. **Đăng ký vào Registry** tại `src/data/index.ts`:
+```typescript
+import { myRunbook } from './my-runbook';
+export const runbookRegistry: Record<string, Runbook> = {
+  [networkRunbook.id]: networkRunbook,
+  [myRunbook.id]: myRunbook,
+};
+```
+
+3. **Kiểm tra**: Chạy `npm run check` — Traversal Engine sẽ tự động kiểm định chu trình (cycle-free) và nạp lên giao diện.
 
 ---
 

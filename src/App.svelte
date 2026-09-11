@@ -10,16 +10,7 @@
   import TerminalNodeView from './components/runbook/TerminalNodeView.svelte';
   import IncidentReportModal from './components/report/IncidentReportModal.svelte';
 
-  import { 
-    Terminal, 
-    Network, 
-    CheckCircle2, 
-    HardDrive, 
-    Cpu, 
-    ShieldCheck, 
-    RotateCcw,
-    FileText 
-  } from '@lucide/svelte';
+  import { HardDrive, ShieldCheck } from '@lucide/svelte';
 
   // Khởi tạo Engine điều hướng (Khôi phục session cũ từ LocalStorage nếu có)
   let engine = $state<TraversalEngine>(createInitialEngine());

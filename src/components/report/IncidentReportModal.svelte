@@ -9,11 +9,7 @@
     Download, 
     FileText, 
     CheckCircle2, 
-    ShieldAlert, 
-    Layers, 
-    Clock, 
-    User, 
-    Tag 
+    ShieldAlert 
   } from '@lucide/svelte';
 
   interface Props {

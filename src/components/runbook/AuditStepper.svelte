@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { SessionStepRecord } from '../../types/runbook';
   import Badge from '../ui/Badge.svelte';
-  import { Clock, CheckCircle2, ChevronRight, History } from '@lucide/svelte';
+  import { ChevronRight, History } from '@lucide/svelte';
 
   interface Props {
     history: readonly SessionStepRecord[];

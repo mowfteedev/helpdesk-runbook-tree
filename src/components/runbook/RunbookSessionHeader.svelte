@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Runbook } from '../../types/runbook';
-  import { Network, Terminal, Clock, FileText, User, Tag, Sparkles } from '@lucide/svelte';
+  import { Terminal, FileText, User, Tag } from '@lucide/svelte';
 
   interface Props {
     runbook: Runbook;

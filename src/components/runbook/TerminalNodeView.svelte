@@ -11,11 +11,8 @@
     RotateCcw, 
     ArrowLeft, 
     Info, 
-    ExternalLink, 
-    Layers, 
     CheckSquare, 
-    PhoneCall,
-    Share2
+    PhoneCall 
   } from '@lucide/svelte';
 
   interface Props {
