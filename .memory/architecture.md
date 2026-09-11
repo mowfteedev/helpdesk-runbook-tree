@@ -7,8 +7,9 @@
 
 ## 1. Tổng Quan & Mục Tiêu Kỹ Thuật
 - **Mục tiêu sản phẩm**: Cung cấp công cụ chẩn đoán sự cố mạng, dịch vụ và hệ điều hành theo cây quyết định (L1 đến L7). Giúp kỹ thuật viên Helpdesk & Network Admin chẩn đoán có phương pháp (guided troubleshooting), giảm MTTR (Mean Time to Resolve), và tự động tạo Biên bản Sự cố (Incident Report) chuẩn hóa khi chuyển tuyến (escalate).
-- **Kiến trúc chủ đạo**: **Client-Side SPA / Offline-First Monolith** (không phụ thuộc backend máy chủ để đảm bảo kỹ thuật viên vẫn dùng được khi mạng nội bộ/internet gặp sự cố).
-- **Môi trường chạy**: Trình duyệt Web (Modern Browsers), PWA / Static Hosting (GitHub Pages / Vercel / Cloudflare Pages).
+- **Kiến trúc chủ đạo**: **Client-Side SPA / Zero-Server Monolith** (chạy 100% trên trình duyệt người dùng, lưu trữ Local-First qua `localStorage`, hoàn toàn không phụ thuộc vào máy chủ backend).
+- **Môi trường vận hành chính thức**: **GitHub Pages (Zero-Ops)** tại `https://mowfteedev.github.io/helpdesk-runbook-tree/`.
+- **Chi phí vận hành**: **0 VNĐ** (Không thuê server, không bảo trì hạ tầng, không phí duy trì).
 
 ---
 
@@ -16,10 +17,12 @@
 
 | Thành phần | Công nghệ lựa chọn | Lý do & Đánh đổi kỹ thuật |
 | :--- | :--- | :--- |
-| **Framework UI** | **Svelte 5 + Vite (TypeScript)** | **Ưu điểm**: Zero-virtual-DOM, reactive state tự nhiên cho cây quyết định, bundle siêu nhẹ (< 45KB gzip), TypeScript type-safe tuyệt đối cho Schema dữ liệu cây. <br>**Đánh đổi**: Cần bước build Vite (so với Alpine.js single HTML), nhưng loại bỏ hoàn toàn nguy cơ spaghetti code khi cây phình to. |
-| **Styling** | **Tailwind CSS + Lucide Icons** | Giao diện chuẩn IT Ops / Terminal / Dark Mode hiện đại, trực quan, hỗ trợ Mobile/Desktop responsive. |
-| **Dữ liệu Runbook** | **JSON / TypeScript Schema (Static Bundled + Local Storage)** | Data-driven: Toàn bộ cây chẩn đoán là cấu trúc dữ liệu thuần túy (Node Graph), tách biệt hoàn toàn khỏi code giao diện. Cho phép import/export cây chẩn đoán tùy chỉnh. |
-| **Báo cáo sự cố** | **jsPDF + html2canvas + Native Print CSS + Markdown Exporter** | Hỗ trợ 2 chế độ: Xuất Markdown để paste vào Jira/ServiceNow/Slack, và xuất file PDF chuyên nghiệp lưu trữ nội bộ. |
+| **Framework UI** | **Svelte 5 + Vite (TypeScript)** | **Ưu điểm**: Zero-virtual-DOM, reactive runes (`$state`, `$derived`), bundle siêu nhẹ (< 30KB gzip), TypeScript type-safe tuyệt đối cho Schema dữ liệu cây. <br>**Đánh đổi**: Cần bước build Vite, nhưng đóng gói ra file tĩnh thuần túy cực sạch. |
+| **Styling** | **Tailwind CSS v4 + Lucide Icons** | Giao diện chuẩn IT Ops / Terminal / Dark Mode hiện đại, trực quan, hỗ trợ Mobile/Desktop responsive. |
+| **Vận hành & Hosting** | **GitHub Pages + GitHub Actions CI/CD** | **Zero-Ops**: Push code tự động build & deploy lên Fastly CDN Edge toàn cầu của GitHub. Không cần thuê VPS. |
+| **Lưu trữ phiên** | **Local-First (`localStorage` + JSON Import/Export)** | Lưu vết toàn bộ lịch sử chẩn đoán, audit trail ngay trong trình duyệt máy kỹ thuật viên; mất mạng hoặc tắt máy mở lại vẫn còn nguyên. |
+| **Dữ liệu Runbook** | **JSON / TypeScript Schema (Static Bundled Hash Map)** | Data-driven: Toàn bộ cây chẩn đoán là cấu trúc dữ liệu thuần túy (DAG Graph `Record<string, RunbookNode>`), truy xuất $O(1)$ tức thì, tách biệt hoàn toàn khỏi code giao diện. |
+| **Báo cáo sự cố** | **Client-Side Markdown Exporter + Native Print / jsPDF** | Xuất Markdown chuẩn ITIL (Jira/ServiceNow/Slack ready) và xuất file PDF chuyên nghiệp trực tiếp từ trình duyệt. |
 
 ---
 

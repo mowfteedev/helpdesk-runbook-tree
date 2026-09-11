@@ -6,6 +6,9 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tech Stack](https://img.shields.io/badge/Stack-Svelte_5_%7C_Tailwind_CSS_%7C_TypeScript-ff3e00)](https://svelte.dev/)
 [![Offline First](https://img.shields.io/badge/Offline--First-100%25-green)](https://github.com/mowfteedev/helpdesk-runbook-tree)
+[![GitHub Pages](https://img.shields.io/badge/Live_Demo-GitHub_Pages-blue?logo=github)](https://mowfteedev.github.io/helpdesk-runbook-tree/)
+
+🌐 **Live URL trên GitHub Pages**: [https://mowfteedev.github.io/helpdesk-runbook-tree/](https://mowfteedev.github.io/helpdesk-runbook-tree/)
 
 ---
 
@@ -16,7 +19,7 @@
 - **1-Click Command Copy**: Sao chép lệnh nhanh chóng kèm phản hồi trực quan.
 - **Audit Trail & Breadcrumb**: Ghi lại toàn bộ hành trình chẩn đoán, hỗ trợ quay lại (backtrack) mà không mất dữ liệu.
 - **Incident Report Generator**: Tự động tổng hợp dữ liệu chẩn đoán thành biên bản sự cố chuẩn ITIL dạng **Markdown** (sẵn sàng dán vào Jira/ServiceNow) và **PDF**.
-- **100% Offline-First**: Hoạt động hoàn toàn trên trình duyệt, không phụ thuộc vào internet khi gặp sự cố mạng nội bộ.
+- **100% Zero-Server & Offline-First**: Hoạt động hoàn toàn trên trình duyệt, không cần bất kỳ máy chủ backend nào.
 
 ---
 
@@ -25,7 +28,8 @@
 Dự án được xây dựng và quản lý bởi **`mowftee-guild`**:
 - [Kiến trúc hệ thống](.memory/architecture.md)
 - [Bảng tiến độ tác chiến](.memory/progress.md)
-- [Biên bản quyết định kiến trúc (ADR-0001)](.memory/adr/0001-khoi-tao-du-an.md)
+- [ADR-0001: Lựa chọn nền tảng Svelte 5 + Vite + TypeScript](.memory/adr/0001-khoi-tao-du-an.md)
+- [ADR-0002: Kiến trúc vận hành Zero-Ops trên GitHub Pages](.memory/adr/0002-kien-truc-van-hanh-github-pages-zero-ops.md)
 
 ---
 
