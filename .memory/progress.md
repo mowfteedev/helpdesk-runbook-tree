@@ -13,8 +13,8 @@
 |:---:|:---|:---:|:---|:---|:---:|
 | 1 | **Khởi tạo Scaffold Svelte 5 + Vite + Tailwind CSS** | `@tech-lead` | `package.json`, `vite.config.ts`, `app.css`, `App.svelte` | Khởi chạy `npm run dev` không lỗi, bundle build sạch sẽ (~26kB gzip) | 🟢 Đã xong |
 | 2 | **Định nghĩa Data Contract & Schema Runbook** | `@database` / Data | `src/types/runbook.ts` | 100% strict TypeScript types, hỗ trợ đầy đủ Command, Sample Output, Branches, Escalation | 🟢 Đã xong |
-| 3 | **Xây dựng Bộ dữ liệu chẩn đoán thực tế Network L1-L3** | `@database` / Data | `src/data/network-runbook.ts` | Đầy đủ kịch bản từ cáp mạng -> DHCP -> Gateway -> WAN -> DNS kèm command & output mẫu | ⏳ Sẵn sàng làm |
-| 4 | **Xây dựng Traversal Engine & DAG Validator** | `@backend` / Engine | `src/engine/traversal.ts`, `src/engine/validator.ts` | Thuật toán DFS phát hiện cycle, không có dead-end node mồ côi | ⚪ Chờ duyệt |
+| 3 | **Xây dựng Bộ dữ liệu chẩn đoán thực tế Network L1-L3** | `@database` / Data | `src/data/network-runbook.ts` | Đầy đủ kịch bản từ cáp mạng -> DHCP -> Gateway -> WAN -> DNS kèm command & output mẫu | 🟢 Đã xong |
+| 4 | **Xây dựng Traversal Engine & DAG Validator** | `@backend` / Engine | `src/engine/traversal.ts`, `src/engine/validator.ts` | Thuật toán DFS phát hiện cycle, không có dead-end node mồ côi | ⏳ Sẵn sàng làm |
 | 5 | **Xây dựng Session Store & Audit Trail** | `@backend` / Engine | `src/engine/session-store.ts` | Lưu vết đầy đủ các bước đã đi qua, hỗ trợ Undo/Backtrack không mất state | ⚪ Chờ duyệt |
 | 6 | **Thiết kế Visual System & Terminal Theme** | `@designer` | `src/styles/theme.css` | Giao diện chuẩn IT Ops Dark/Light, Badge màu OSI L1-L7, Badge độ ưu tiên P1-P4 | ⚪ Chờ duyệt |
 | 7 | **Xây dựng Interactive UI Components** | `@frontend` | `src/components/runbook/*` | Terminal output card, nút Copy CLI 1-click có visual cue, nút rẽ nhánh responsive | ⚪ Chờ duyệt |
