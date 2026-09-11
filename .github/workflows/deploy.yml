@@ -1,0 +1,70 @@
+name: Deploy Helpdesk Runbook Tree to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+# Quyền hạn bảo mật của GITHUB_TOKEN để xuất bản lên GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Không cho phép 2 bản build deploy đè lên nhau cùng một thời điểm
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # ----------------------------------------------------------------------------
+  # GIAI ĐOẠN 1: KIỂM THỬ CHẤT LƯỢNG & ĐÓNG GÓI BUNDLE (BUILD)
+  # ----------------------------------------------------------------------------
+  build:
+    name: 🏗️ Type Check & Build Bundle
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📥 Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js 20 LTS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: 📦 Install Clean Dependencies
+        run: npm ci
+
+      - name: 🔍 Strict Type Check & Svelte Diagnostics
+        run: npm run check
+
+      - name: ⚡ Build Production Bundle
+        run: npm run build
+
+      - name: 🛡️ Anti-404 Fallback for GitHub Pages SPA
+        run: cp dist/index.html dist/404.html
+
+      - name: ⚙️ Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: 📤 Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
+
+  # ----------------------------------------------------------------------------
+  # GIAI ĐOẠN 2: XUẤT BẢN LÊN GITHUB PAGES CDN (DEPLOY)
+  # ----------------------------------------------------------------------------
+  deploy:
+    name: 🚀 Deploy to GitHub Pages CDN
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: 🌐 Deploy to GitHub Pages Edge
+        id: deployment
+        uses: actions/deploy-pages@v4

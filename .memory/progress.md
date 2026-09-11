@@ -21,9 +21,9 @@
 | 2 | **Định nghĩa Data Contract & Schema Runbook** | `@database` / Data | `src/types/runbook.ts`, `src/types/index.ts` | 100% strict TypeScript types, hỗ trợ đầy đủ Command, Sample Output, Branches, Escalation | 🟢 Đã xong (`b07f0d6`) |
 | 3 | **Xây dựng Bộ dữ liệu chẩn đoán thực tế Network L1-L3** | `@database` / Data | `src/data/network-runbook.ts`, `src/data/index.ts` | 22 nodes bao quát từ cáp mạng L1 -> DHCP -> Gateway -> WAN -> DNS L7 kèm command & output mẫu | 🟢 Đã xong (`fe4b46c`) |
 | 4 | **Xây dựng Traversal Engine & DAG Validator** | `@backend` / Engine | `src/engine/traversal.ts`, `src/engine/validator.ts` | Thuật toán DFS phát hiện cycle, BFS tìm shortest path, không có dead-end node mồ côi | 🟢 Đã xong (`478b736`) |
-| 5 | **Xây dựng Session Store & Audit Trail** | `@backend` / Engine | `src/engine/session-store.ts` | Lưu vết đầy đủ các bước đã đi qua, hỗ trợ Undo/Backtrack không mất state, lưu LocalStorage | 🟢 Đã xong |
-| 6 | **Tự động hóa CI/CD Deploy GitHub Pages** | `@devops` | `.github/workflows/deploy.yml` | Push code tự động build & deploy lên GitHub Pages (`https://mowfteedev.github.io/...`) | ⏳ Sẵn sàng làm |
-| 7 | **Thiết kế Visual System & Terminal Theme** | `@designer` | `src/styles/theme.css` | Giao diện chuẩn IT Ops Dark/Light, Badge màu OSI L1-L7, Badge độ ưu tiên P1-P4 | ⚪ Chờ duyệt |
+| 5 | **Xây dựng Session Store & Audit Trail** | `@backend` / Engine | `src/engine/session-store.ts` | Lưu vết đầy đủ các bước đã đi qua, hỗ trợ Undo/Backtrack không mất state, lưu LocalStorage | 🟢 Đã xong (`b75d17d`) |
+| 6 | **Tự động hóa CI/CD Deploy GitHub Pages** | `@devops` | `.github/workflows/deploy.yml` | Push code tự động build & deploy lên GitHub Pages (`https://mowfteedev.github.io/...`) | 🟢 Đã xong |
+| 7 | **Thiết kế Visual System & Terminal Theme** | `@designer` | `src/styles/theme.css` | Giao diện chuẩn IT Ops Dark/Light, Badge màu OSI L1-L7, Badge độ ưu tiên P1-P4 | ⏳ Sẵn sàng làm |
 | 8 | **Xây dựng Interactive UI Components** | `@frontend` | `src/components/runbook/*` | Terminal output card, nút Copy CLI 1-click có visual cue, nút rẽ nhánh responsive | ⚪ Chờ duyệt |
 | 9 | **Module Sinh Báo Cáo Sự Cố (Markdown & PDF)** | `@frontend` + `@backend` | `src/engine/report-generator.ts`, `src/components/report/*` | Xuất Markdown chuẩn ITIL (Jira/ServiceNow ready) và xuất file PDF tải về ngay | ⚪ Chờ duyệt |
 | 10 | **Rà soát Mã Nguồn & Tối ưu Bundle** | `@code-reviewer` | Toàn bộ `src/` | Không any, không memory leak, clean component structure | ⚪ Chờ duyệt |
