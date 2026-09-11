@@ -1,9 +1,9 @@
 # 📌 Bảng Tiến Độ & Bộ Nhớ Tác Chiến: helpdesk-runbook-tree
-*Cập nhật lần cuối: 2026-09-11 20:45*
+*Cập nhật lần cuối: 2026-09-11 20:55*
 
 ## 🎯 Mục Tiêu Phiên Hiện Tại (Current Milestone)
 - **Giai đoạn**: Phân chia tác chiến & Khởi tạo MVP (Phase 1: Foundation & Core Engine)
-- **Trọng tâm**: Phân công chi tiết từng đầu việc với tiêu chí nghiệm thu rõ ràng cho các chuyên gia trong bang hội, kích hoạt khởi tạo dự án và lõi Engine.
+- **Trọng tâm**: Khởi tạo Scaffold Svelte 5 + Tailwind CSS hoàn tất; sẵn sàng bàn giao cho `@database` định nghĩa Data Contract & Schema Runbook (Task 2).
 
 ---
 
@@ -11,8 +11,8 @@
 
 | STT | Đầu việc cụ thể | Chuyên gia phụ trách | File / Module tác động | Tiêu chí Nghiệm thu (Đạt chuẩn) | Trạng thái |
 |:---:|:---|:---:|:---|:---|:---:|
-| 1 | **Khởi tạo Scaffold Svelte 5 + Vite + Tailwind CSS** | `@tech-lead` | `package.json`, `vite.config.ts`, `tailwind.config.js` | Khởi chạy `npm run dev` không lỗi, bundle build sạch sẽ | ⏳ Đang làm |
-| 2 | **Định nghĩa Data Contract & Schema Runbook** | `@database` / Data | `src/types/runbook.ts` | 100% strict TypeScript types, hỗ trợ đầy đủ Command, Sample Output, Branches, Escalation | ⚪ Chờ duyệt |
+| 1 | **Khởi tạo Scaffold Svelte 5 + Vite + Tailwind CSS** | `@tech-lead` | `package.json`, `vite.config.ts`, `app.css`, `App.svelte` | Khởi chạy `npm run dev` không lỗi, bundle build sạch sẽ (~26kB gzip) | 🟢 Đã xong |
+| 2 | **Định nghĩa Data Contract & Schema Runbook** | `@database` / Data | `src/types/runbook.ts` | 100% strict TypeScript types, hỗ trợ đầy đủ Command, Sample Output, Branches, Escalation | ⏳ Sẵn sàng làm |
 | 3 | **Xây dựng Bộ dữ liệu chẩn đoán thực tế Network L1-L3** | `@database` / Data | `src/data/network-runbook.ts` | Đầy đủ kịch bản từ cáp mạng -> DHCP -> Gateway -> WAN -> DNS kèm command & output mẫu | ⚪ Chờ duyệt |
 | 4 | **Xây dựng Traversal Engine & DAG Validator** | `@backend` / Engine | `src/engine/traversal.ts`, `src/engine/validator.ts` | Thuật toán DFS phát hiện cycle, không có dead-end node mồ côi | ⚪ Chờ duyệt |
 | 5 | **Xây dựng Session Store & Audit Trail** | `@backend` / Engine | `src/engine/session-store.ts` | Lưu vết đầy đủ các bước đã đi qua, hỗ trợ Undo/Backtrack không mất state | ⚪ Chờ duyệt |

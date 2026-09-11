@@ -31,4 +31,22 @@ Dự án được xây dựng và quản lý bởi **`mowftee-guild`**:
 
 ## 🚀 Cài Đặt & Phát Triển (Quick Start)
 
-*(Sẽ cập nhật sau khi hoàn tất thiết lập mã nguồn)*
+Yêu cầu môi trường: **Node.js >= 18**
+
+```bash
+# 1. Cài đặt dependencies
+npm install
+
+# 2. Khởi chạy môi trường phát triển (HMR)
+npm run dev
+
+# 3. Kiểm tra kiểu TypeScript & cú pháp Svelte
+npm run check
+
+# 4. Đóng gói production bundle
+npm run build
+
+# 5. Xem trước bản đóng gói
+npm run preview
+```
+
